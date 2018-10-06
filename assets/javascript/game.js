@@ -19,7 +19,7 @@ for ( let i = 0; i < computerChoice.length; i++) {
 }
 
 // FUNCTION TO REMOVE COMMAS FROM THE ARRAY WHEN PRINTING TO SCREEN
-var blankAnswerString = function() {
+function blankAnswerString() {
     var printThis = "";
     for(var i = 0; i < blankAnswer.length; i++) {
         printThis += blankAnswer[i];
@@ -28,7 +28,7 @@ var blankAnswerString = function() {
 }
 
 // FUNCTION TO REMOVE COMMAS FROM GUESSES ARRAY AND PRINT TO SCREEN WITH SPACES
-var guessesString = function() {
+function guessesString() {
     var printThis = "";
     for(var i = 0; i < guesses.length; i++) {
         printThis += guesses[i] + " ";
@@ -37,27 +37,47 @@ var guessesString = function() {
 }
 
 // FUNCTION TO COMPARE USER GUESS TO EACH ELEMENT IN THE SPLIT ARRAY. REPLACE ELEMENT WITH LETTER IF CORRECT, LIVES -1 IF NOT
-var check = function(userGuess) {
+function check(userGuess) {
     for(var i = 0; i < computerChoice.length; i++) {
         if (userGuess === computerChoice[i]) {
             // display letter on blankAnswer
             blankAnswer[i] = userGuess;
-        } else {
-            // if no match, lives -1 
-            life--;
-        }
+        } 
+    }
+    if (!computerChoice.includes(userGuess) && alphabet.includes(userGuess)) {
+        life--;
     }
 }
 
-// FUNCTION TO CHECK IF KEYPRESS IS A DUPLICATE
-var validKey = function(userGuess) {
-    if (!guesses.includes(userGuess)) {
-        guesses.push(userGuess);
-        guessesString();
+// FUNCTION TO CHECK IF KEYPRESS IS A DUPLICATE AND A LETTER
+function validKey(userGuess) {
+    if (alphabet.includes(userGuess)) {
+        if (!guesses.includes(userGuess)) {
+            guesses.push(userGuess);
+            guessesString();
+        } else {
+            alert(userGuess + " has already been guessed");
+        }
     } else {
-        alert(userGuess + " has already been guessed");
+        alert("Not a letter");
     }
 }
+
+// CHECK SCORE FOR WIN AND LOSS
+function checkScore() {
+    if (!blankAnswer.includes("-")) {
+        document.write("YOU WIN WIN WIN!!!");
+    }
+    if (life === 0) {
+        // GAME OVER
+        document.write("GAME OVER");
+    }
+}
+
+// PRINT DASHES BEFORE FIRST KEYPRESS
+word.innerText = blankAnswerString();
+// PRINT LIVES BEFORE FIRST KEYPRESS
+lives.innerText = life;
 
 // PLAYER PRESSES A KEY
 document.onkeyup = function(event) {
@@ -65,14 +85,12 @@ document.onkeyup = function(event) {
 
     // CHECK IF KEY HAS BEEN PRESSED BEFORE AND PUSH TO ARRAY OF GUESSES IF NOT
     validKey(userGuess);
-    // CHECK IF KEY PRESS MATCHES A LETTER IN THE ANSWER
+
+    // CHECK IF KEY PRESS MATCHES A LETTER IN THE ANSWER THEN PUSH GUESS TO ARRAY OF GUESSES
     check(userGuess);
 
-
-
-
-
-
+    // CHECK SCORE FOR GAME OVER
+    checkScore();
 
     // PRINT NO-COMMA ARRAY TO SCREEN
     word.innerText = blankAnswerString();
@@ -80,6 +98,7 @@ document.onkeyup = function(event) {
     lives.innerText = life;
     // guesses
     guessed.innerText = guessesString();
+
 
 }
 
