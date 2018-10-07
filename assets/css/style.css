@@ -10,7 +10,8 @@ body {
 
 .header {
     background: #444;
-    max-width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
     border-bottom: rgb(156, 0, 0) 5px solid;
     padding-bottom: 0;
 }
@@ -40,7 +41,6 @@ body {
 .image-container {
     max-width: 600px;
     margin: 0 auto;
-    border-top: rgb(156, 0, 0) 5px solid;
 }
 img {
     max-width: 100%;
