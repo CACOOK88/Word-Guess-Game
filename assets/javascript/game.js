@@ -1,3 +1,10 @@
+// **********************************************************************
+// 
+//            VARIABLES 
+// 
+// **********************************************************************
+
+
 // VARIABLES FOR GRABBING HTML ELEMENTS
 var word = document.getElementById("word");
 var lives = document.getElementById("lives");
@@ -25,6 +32,14 @@ var computerChoice;
 // VARIABLES FOR WORD CHOICE AND ALPHABET VERIFICATION
 var answers = ["mustang", "camaro", "corvette", "challenger", "charger"];
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+
+// **********************************************************************
+// 
+//            FUNCTIONS 
+// 
+// **********************************************************************
+
 
 // INITIATES NEW COMPUTER CHOICE AND PRINTS DASHES TO THE SCREEN.
 function newComputerChoice() {
@@ -138,13 +153,27 @@ function checkScore() {
     lossesCounter.innerText = losses;
 }
 
+
+
+
+// **********************************************************************
+// 
+//            GAME EXECUTION 
+// 
+// **********************************************************************
+
+
+
 // INITIATE FIRST GAME ON SCREEN LOAD
 newComputerChoice();
-// PLAYER PRESSES A KEY
-document.onkeyup = function(event) {
 
+// EXECUTES WHEN PLAYER PRESSES A KEY
+document.onkeyup = function(event) {
+    // SET KEYPRESS TO VARIABLE FOR USE IN FUNCTIONS
     var userGuess = event.key
-    // CHECK IF ANSWER IS ALREADY FULL, IF SO, DONT RUN ANY CODE ON KEYPRESSES
+    userGuess = userGuess.toLowerCase(); //CONVERT TO LOWER CASE JUST IN CASE CAPS LOCK IS ON USER KEYBOARD
+
+    // CHECK IF ANSWER IS ALREADY FULFILLED, IF SO, DONT RUN ANY CODE ON KEYPRESSES
     if (blankAnswer.includes(" _ ")) {
 
         // CHECK IF KEY HAS BEEN PRESSED BEFORE AND PUSH TO ARRAY OF GUESSES IF NOT
