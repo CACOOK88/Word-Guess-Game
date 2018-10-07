@@ -6,7 +6,6 @@ body {
     color: #aaa;
     text-align: center;
     font-family: 'McLaren', cursive;
-    font-size: 1.5rem;
 }
 
 .header {
@@ -17,8 +16,9 @@ body {
 }
 
 .title {
-    font-size: 50px;
+    font-size: 40px;
     margin-bottom: 0;
+    padding-bottom: 0;
     margin-top: 0;
     /* CREATE TEXT COLOR GRADIENT */
     background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(231, 175, 175), rgb(245, 50, 50), rgb(156, 0, 0));
@@ -28,19 +28,12 @@ body {
 }
 
 .sub-header {
-   margin: 10px 0; 
-}
-
-
-/* HIDDEN CLASS FOR GAME.JS TO SHOW OR HIDE ITEMS */
-.hidden {
-    display: none;
-    margin: 0;
-    padding: 0
+   margin: 5px 0; 
+   font-size: 20px
 }
 
 #word {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 /* MANAGE IMAGE DIV TO KEEP MINIMIZE SCROLLING */
@@ -55,9 +48,10 @@ img {
 }
 
 #hint-button {
-    background-color: yellow;
+    background-color: rgb(28, 28, 153);
     border-radius: 10px;
-    color: #222;
+    border-color: #aaa;
+    color: #aaa;
     padding: 10px 25px;
     font-size: 20px;
 }
@@ -76,4 +70,11 @@ img {
 p {
     margin-top: 0;
     margin-bottom: 5px;
+}
+
+/* HIDDEN CLASS FOR GAME.JS TO SHOW OR HIDE ITEMS */
+.hidden {
+    display: none;
+    margin: 0;
+    padding: 0
 }

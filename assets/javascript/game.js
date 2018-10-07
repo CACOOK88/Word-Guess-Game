@@ -50,6 +50,12 @@ function newGame() {
         lose.innerText = "";
         win.innerText = "";
         newComputerChoice();
+        // SHOW HINT BUTTON
+        var element5 = document.getElementById("hint-button");
+        element5.classList.remove("hidden");
+        // REMOVE PREVIOUS HINT TEXT
+        var element6 = document.getElementById("hint-text");
+        element6.innerText = "";
     }, 5000);
 }
 
@@ -156,9 +162,24 @@ document.onkeyup = function(event) {
     lives.innerText = life;
     // guesses
     guessed.innerText = guessesString();
-
-
 }
 
-
+// BUTTON CLICK EVENT LISTENER TO SHOW HINT
+document.getElementById("hint-button").onclick = function() {
+    // HIDE BUTTON WHEN CLICKED
+    var element = document.getElementById("hint-button");
+    element.classList.add("hidden");
+    if (computerChoice === "camaro" || computerChoice === "corvette") {
+        var element1 = document.getElementById("hint-text");
+        element1.innerText = "Chevrolet makes this car";
+    }
+    if (computerChoice === "charger" || computerChoice === "challenger") {
+        var element1 = document.getElementById("hint-text");
+        element1.innerText = "Dodge makes this car";
+    }
+    if (computerChoice === "mustang") {
+        var element1 = document.getElementById("hint-text");
+        element1.innerText = "Ford makes this car";
+    }
+}
 
