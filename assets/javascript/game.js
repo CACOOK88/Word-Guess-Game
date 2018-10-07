@@ -19,7 +19,7 @@ var lineupPic = document.getElementById("lineup");
 var gameOverPic = document.getElementById("gameover");
 var getStartedText = document.getElementById("get-started");
 // VARIABLES TO KEEP TRACK OF GAME SCORE
-var life;
+var life; // LIFE COUNTER INITIATED IN NEWCOMPUTERCHOICE FUNCTION
 var wins = 0;
 var losses = 0;
 // ARRAYS TO STORE GUESSES AND ANSWERS
