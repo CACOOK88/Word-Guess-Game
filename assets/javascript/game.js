@@ -136,7 +136,7 @@ function checkScore() {
         // SHOW PICTURE OF COMPUTERCHOICE
         var element = document.getElementById(computerChoice)
         element.classList.remove("hidden");
-        getStartedText = "New Game Star"
+        getStartedText.innerText = "New Game Starts in 5 seconds"
         newGame();
     }
     if (life === 0) {
@@ -149,6 +149,7 @@ function checkScore() {
         gameOverPic.classList.remove("hidden");
         // SET WORD TO ANSWER
         blankAnswer = computerChoice.toUpperCase();
+        getStartedText.innerText = "New Game Starts in 5 seconds"
         newGame();
     }
     winCounter.innerText = wins;
