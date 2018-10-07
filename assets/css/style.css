@@ -35,6 +35,8 @@ body {
 /* HIDDEN CLASS FOR GAME.JS TO SHOW OR HIDE ITEMS */
 .hidden {
     display: none;
+    margin: 0;
+    padding: 0
 }
 
 #word {
@@ -45,6 +47,7 @@ body {
 .image-container {
     max-width: 600px;
     margin: 0 auto;
+    border-top: rgb(156, 0, 0) 5px solid;
 }
 img {
     max-width: 100%;
@@ -59,9 +62,15 @@ img {
     font-size: 20px;
 }
 
-#lives {
+#lives,
+#win-counter {
     font-size: 2rem;
     color: green;
+}
+
+#losses-counter {
+    font-size: 2rem;
+    color: red;
 }
 
 p {

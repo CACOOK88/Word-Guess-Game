@@ -4,20 +4,51 @@ var lives = document.getElementById("lives");
 var guessed = document.getElementById("guessed");
 var win = document.getElementById("win-text");
 var lose = document.getElementById("lose-text");
-var life = 15;
+var winCounter = document.getElementById("win-counter");
+var lossesCounter = document.getElementById("losses-counter");
+var life;
+var wins = 0;
+var losses = 0;
 var guesses = [];
 var blankAnswer = [];
+var computerChoice;
 
 // VARIABLES FOR WORD CHOICE AND ALPHABET VERIFICATION
 var answers = ["mustang", "camaro", "corvette", "challenger", "charger"];
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
-// CHOOSING RANDOM FOR COMPUTER
-var computerChoice = answers[Math.floor(Math.random() * answers.length)];
+// INITIATES NEW COMPUTER CHOICE AND PRINTS DASHES TO THE SCREEN.
+function newComputerChoice() {
+    computerChoice = answers[Math.floor(Math.random() * answers.length)];
+    // FOR LOOP TO TAKE LETTERS AND CONVERT THEM TO ARRAY OF DASHES IN PLACE OF EACH LETTER.
+    for ( let i = 0; i < computerChoice.length; i++) {
+        blankAnswer.push("_");
+    }
+    // SET LIFE COUNTER
+    life = 5;
+    // PRINT UPDATED EMPTY GUESSES TO SCREEN
+    guessed.innerText = guessesString();
+    // PRINT DASHES BEFORE FIRST KEYPRESS
+    word.innerText = blankAnswerString();
+    // PRINT LIVES BEFORE FIRST KEYPRESS
+    lives.innerText = life;
+}
 
-// FOR LOOP TO TAKE ARRAY OF LETTERS AND CONVERT THEM TO ARRAY OF DASHES IN PLACE OF EACH LETTER.
-for ( let i = 0; i < computerChoice.length; i++) {
-    blankAnswer.push("_ ");
+// NEW GAME FUNCTION TO CALL WHEN WIN OR LOSE
+function newGame() {
+    setTimeout(function () {
+        var element1 = document.getElementById(computerChoice); 
+        element1.classList.add("hidden"); //HIDE CAR PIC
+        var element2 = document.getElementById("lineup");
+        element2.classList.remove("hidden"); //SHOW LINEUP PIC
+        var element3 = document.getElementById("gameover");
+        element3.classList.add("hidden"); //HIDE GAMEOVER PIC
+        blankAnswer = [];
+        guesses = [];
+        lose.innerText = "";
+        win.innerText = "";
+        newComputerChoice();
+    }, 5000);
 }
 
 // FUNCTION TO REMOVE COMMAS FROM THE ARRAY WHEN PRINTING TO SCREEN
@@ -54,9 +85,12 @@ function check(userGuess) {
 // FUNCTION TO CHECK IF KEYPRESS IS A DUPLICATE AND A LETTER
 function validKey(userGuess) {
     if (alphabet.includes(userGuess)) {
-        if (!guesses.includes(userGuess)) {
+        if (!guesses.includes(userGuess.toUpperCase())) {
             guesses.push(userGuess.toUpperCase());
             guessesString();
+            // HIDE DIRECTIONS
+            element = document.getElementById("get-started");
+            element.classList.add("hidden");
         } else {
             alert(userGuess + " has already been guessed");
         }
@@ -67,36 +101,41 @@ function validKey(userGuess) {
 
 // CHECK SCORE FOR WIN AND LOSS
 function checkScore() {
-    if (!blankAnswer.includes("-")) {
-        // SHOW WIN TEXT
+    if (!blankAnswer.includes("_")) {
+        // SHOW WIN TEXT AND INCREMENT WINCOUNTER
         win.innerText = "YOU WIN!!!";
+        wins++;
         // REMOVE LINEUP PICTURE
         var element1 = document.getElementById("lineup");
         element1.classList.add("hidden");
         // SHOW PICTURE OF COMPUTERCHOICE
         var element2 = document.getElementById(computerChoice);
         element2.classList.remove("hidden");
+        newGame();
     }
     if (life === 0) {
-        // GAME OVER YOU LOSE TEXT
+        // GAME OVER YOU LOSE TEXT AND DECREMENT LOSSCOUNTER
         lose.innerText = "YOU LOSE";
+        losses++;
         // REMOVE LINEUP PICTURE
         var element1 = document.getElementById("lineup");
         element1.classList.add("hidden");
         // SHOW GAME OVER PICTURE
         var element2 = document.getElementById("gameover");
         element2.classList.remove("hidden");
-        
+        // SET WORD TO ANSWER
+        blankAnswer = computerChoice.toUpperCase();
+        newGame();
     }
+    winCounter.innerText = wins;
+    lossesCounter.innerText = losses;
 }
 
-// PRINT DASHES BEFORE FIRST KEYPRESS
-word.innerText = blankAnswerString();
-// PRINT LIVES BEFORE FIRST KEYPRESS
-lives.innerText = life;
-
+// INITIATE FIRST GAME ON SCREEN LOAD
+newComputerChoice();
 // PLAYER PRESSES A KEY
 document.onkeyup = function(event) {
+
     var userGuess = event.key
 
     // CHECK IF KEY HAS BEEN PRESSED BEFORE AND PUSH TO ARRAY OF GUESSES IF NOT
