@@ -15,7 +15,6 @@ var winCounter = document.getElementById("win-counter");
 var lossesCounter = document.getElementById("losses-counter");
 var hintText = document.getElementById("hint-text");
 var hintButton = document.getElementById("hint-button");
-var computerChoicePic = document.getElementById(computerChoice);
 var lineupPic = document.getElementById("lineup");
 var gameOverPic = document.getElementById("gameover");
 var getStartedText = document.getElementById("get-started");
@@ -61,7 +60,8 @@ function newComputerChoice() {
 // NEW GAME FUNCTION TO CALL WHEN WIN OR LOSE
 function newGame() {
     setTimeout(function () {
-        computerChoicePic.classList.add("hidden"); //HIDE CAR PIC
+        var element = document.getElementById(computerChoice)
+        element.classList.add("hidden"); //HIDE CAR PIC
         lineupPic.classList.remove("hidden"); //SHOW LINEUP PIC
         gameOverPic.classList.add("hidden"); //HIDE GAMEOVER PIC
         getStartedText.innerText = "Let's Play Again!"
@@ -134,7 +134,9 @@ function checkScore() {
         // REMOVE LINEUP PICTURE
         lineupPic.classList.add("hidden");
         // SHOW PICTURE OF COMPUTERCHOICE
-        computerChoicePic.classList.remove("hidden");
+        var element = document.getElementById(computerChoice)
+        element.classList.remove("hidden");
+        getStartedText = "New Game Star"
         newGame();
     }
     if (life === 0) {
@@ -184,13 +186,14 @@ document.onkeyup = function(event) {
 
         // CHECK SCORE FOR GAME OVER
         checkScore();
+    
+        // PRINT NO-COMMA ARRAY TO SCREEN
+        word.innerText = blankAnswerString();
+        // LIVES
+        lives.innerText = life;
+        // guesses
+        guessed.innerText = guessesString();
     }
-    // PRINT NO-COMMA ARRAY TO SCREEN
-    word.innerText = blankAnswerString();
-    // LIVES
-    lives.innerText = life;
-    // guesses
-    guessed.innerText = guessesString();
 }
 
 // BUTTON CLICK EVENT LISTENER TO SHOW HINT
