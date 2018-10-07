@@ -22,7 +22,7 @@ function newComputerChoice() {
     computerChoice = answers[Math.floor(Math.random() * answers.length)];
     // FOR LOOP TO TAKE LETTERS AND CONVERT THEM TO ARRAY OF DASHES IN PLACE OF EACH LETTER.
     for ( let i = 0; i < computerChoice.length; i++) {
-        blankAnswer.push("_");
+        blankAnswer.push(" _ ");
     }
     // SET LIFE COUNTER
     life = 5;
@@ -43,6 +43,8 @@ function newGame() {
         element2.classList.remove("hidden"); //SHOW LINEUP PIC
         var element3 = document.getElementById("gameover");
         element3.classList.add("hidden"); //HIDE GAMEOVER PIC
+        var element4 = document.getElementById("get-started");
+        element4.innerText = "Let's Play Again!"
         blankAnswer = [];
         guesses = [];
         lose.innerText = "";
@@ -85,12 +87,13 @@ function check(userGuess) {
 // FUNCTION TO CHECK IF KEYPRESS IS A DUPLICATE AND A LETTER
 function validKey(userGuess) {
     if (alphabet.includes(userGuess)) {
+        // HIDE DIRECTIONS
+        var element = document.getElementById("get-started");
+        element.innerText = "";
         if (!guesses.includes(userGuess.toUpperCase())) {
             guesses.push(userGuess.toUpperCase());
             guessesString();
-            // HIDE DIRECTIONS
-            element = document.getElementById("get-started");
-            element.classList.add("hidden");
+            
         } else {
             alert(userGuess + " has already been guessed");
         }
@@ -101,7 +104,7 @@ function validKey(userGuess) {
 
 // CHECK SCORE FOR WIN AND LOSS
 function checkScore() {
-    if (!blankAnswer.includes("_")) {
+    if (!blankAnswer.includes(" _ ")) {
         // SHOW WIN TEXT AND INCREMENT WINCOUNTER
         win.innerText = "YOU WIN!!!";
         wins++;
