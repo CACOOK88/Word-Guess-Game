@@ -1,4 +1,4 @@
-// VARIABLES FOR PRINTING TO SCREEN
+// VARIABLES FOR GRABBING HTML ELEMENTS
 var word = document.getElementById("word");
 var lives = document.getElementById("lives");
 var guessed = document.getElementById("guessed");
@@ -6,11 +6,20 @@ var win = document.getElementById("win-text");
 var lose = document.getElementById("lose-text");
 var winCounter = document.getElementById("win-counter");
 var lossesCounter = document.getElementById("losses-counter");
+var hintText = document.getElementById("hint-text");
+var hintButton = document.getElementById("hint-button");
+var computerChoicePic = document.getElementById(computerChoice);
+var lineupPic = document.getElementById("lineup");
+var gameOverPic = document.getElementById("gameover");
+var getStartedText = document.getElementById("get-started");
+// VARIABLES TO KEEP TRACK OF GAME SCORE
 var life;
 var wins = 0;
 var losses = 0;
+// ARRAYS TO STORE GUESSES AND ANSWERS
 var guesses = [];
 var blankAnswer = [];
+// VAR TO SET COMPUTER CHOICE
 var computerChoice;
 
 // VARIABLES FOR WORD CHOICE AND ALPHABET VERIFICATION
@@ -37,25 +46,19 @@ function newComputerChoice() {
 // NEW GAME FUNCTION TO CALL WHEN WIN OR LOSE
 function newGame() {
     setTimeout(function () {
-        var element1 = document.getElementById(computerChoice); 
-        element1.classList.add("hidden"); //HIDE CAR PIC
-        var element2 = document.getElementById("lineup");
-        element2.classList.remove("hidden"); //SHOW LINEUP PIC
-        var element3 = document.getElementById("gameover");
-        element3.classList.add("hidden"); //HIDE GAMEOVER PIC
-        var element4 = document.getElementById("get-started");
-        element4.innerText = "Let's Play Again!"
+        computerChoicePic.classList.add("hidden"); //HIDE CAR PIC
+        lineupPic.classList.remove("hidden"); //SHOW LINEUP PIC
+        gameOverPic.classList.add("hidden"); //HIDE GAMEOVER PIC
+        getStartedText.innerText = "Let's Play Again!"
         blankAnswer = [];
         guesses = [];
         lose.innerText = "";
         win.innerText = "";
         newComputerChoice();
         // SHOW HINT BUTTON
-        var element5 = document.getElementById("hint-button");
-        element5.classList.remove("hidden");
+        hintButton.classList.remove("hidden");
         // REMOVE PREVIOUS HINT TEXT
-        var element6 = document.getElementById("hint-text");
-        element6.innerText = "";
+        hintText.innerText = "";
     }, 5000);
 }
 
@@ -94,8 +97,7 @@ function check(userGuess) {
 function validKey(userGuess) {
     if (alphabet.includes(userGuess)) {
         // HIDE DIRECTIONS
-        var element = document.getElementById("get-started");
-        element.innerText = "";
+        getStartedText.innerText = "";
         if (!guesses.includes(userGuess.toUpperCase())) {
             guesses.push(userGuess.toUpperCase());
             guessesString();
@@ -108,18 +110,16 @@ function validKey(userGuess) {
     }
 }
 
-// CHECK SCORE FOR WIN AND LOSS
+// CHECK SCORE FOR WIN AND LOSS INITIATE NEW GAME RESET
 function checkScore() {
     if (!blankAnswer.includes(" _ ")) {
         // SHOW WIN TEXT AND INCREMENT WINCOUNTER
         win.innerText = "YOU WIN!!!";
         wins++;
         // REMOVE LINEUP PICTURE
-        var element1 = document.getElementById("lineup");
-        element1.classList.add("hidden");
+        lineupPic.classList.add("hidden");
         // SHOW PICTURE OF COMPUTERCHOICE
-        var element2 = document.getElementById(computerChoice);
-        element2.classList.remove("hidden");
+        computerChoicePic.classList.remove("hidden");
         newGame();
     }
     if (life === 0) {
@@ -127,11 +127,9 @@ function checkScore() {
         lose.innerText = "YOU LOSE";
         losses++;
         // REMOVE LINEUP PICTURE
-        var element1 = document.getElementById("lineup");
-        element1.classList.add("hidden");
+        lineupPic.classList.add("hidden");
         // SHOW GAME OVER PICTURE
-        var element2 = document.getElementById("gameover");
-        element2.classList.remove("hidden");
+        gameOverPic.classList.remove("hidden");
         // SET WORD TO ANSWER
         blankAnswer = computerChoice.toUpperCase();
         newGame();
@@ -146,16 +144,18 @@ newComputerChoice();
 document.onkeyup = function(event) {
 
     var userGuess = event.key
+    // CHECK IF ANSWER IS ALREADY FULL, IF SO, DONT RUN ANY CODE ON KEYPRESSES
+    if (blankAnswer.includes(" _ ")) {
 
-    // CHECK IF KEY HAS BEEN PRESSED BEFORE AND PUSH TO ARRAY OF GUESSES IF NOT
-    validKey(userGuess);
+        // CHECK IF KEY HAS BEEN PRESSED BEFORE AND PUSH TO ARRAY OF GUESSES IF NOT
+        validKey(userGuess);
 
-    // CHECK IF KEY PRESS MATCHES A LETTER IN THE ANSWER THEN PUSH GUESS TO ARRAY OF GUESSES
-    check(userGuess);
+        // CHECK IF KEY PRESS MATCHES A LETTER IN THE ANSWER THEN PUSH GUESS TO ARRAY OF GUESSES
+        check(userGuess);
 
-    // CHECK SCORE FOR GAME OVER
-    checkScore();
-
+        // CHECK SCORE FOR GAME OVER
+        checkScore();
+    }
     // PRINT NO-COMMA ARRAY TO SCREEN
     word.innerText = blankAnswerString();
     // LIVES
@@ -167,19 +167,15 @@ document.onkeyup = function(event) {
 // BUTTON CLICK EVENT LISTENER TO SHOW HINT
 document.getElementById("hint-button").onclick = function() {
     // HIDE BUTTON WHEN CLICKED
-    var element = document.getElementById("hint-button");
-    element.classList.add("hidden");
+    hintButton.classList.add("hidden");
     if (computerChoice === "camaro" || computerChoice === "corvette") {
-        var element1 = document.getElementById("hint-text");
-        element1.innerText = "Chevrolet makes this car";
+        hintText.innerText = "Chevrolet makes this car";
     }
     if (computerChoice === "charger" || computerChoice === "challenger") {
-        var element1 = document.getElementById("hint-text");
-        element1.innerText = "Dodge makes this car";
+        hintText.innerText = "Dodge makes this car";
     }
     if (computerChoice === "mustang") {
-        var element1 = document.getElementById("hint-text");
-        element1.innerText = "Ford makes this car";
+        hintText.innerText = "Ford makes this car";
     }
 }
 
