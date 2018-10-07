@@ -3,15 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangman</title>
-    <link rel="stylesheet" href="assets/css/reset.css">
+    <!-- <link rel="stylesheet" href="assets/css/reset.css"> -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <h1 class="title">Hangman</h1>
-    <hr>
+    <div class="header">
+        <h1 class="title">Hangman</h1>
+        <h3 class="sub-header">Sport Car Edition</h3>
+    </div>
+    
     <span id="word"></span>
     <hr>
+    <h3 id="win-text"></h3>
+    <h3 id="lose-text"></h3>
+    <div class="image-container">
+        <img id="lineup" src="assets/images/carline.jpg" alt="Lineup of cars" class="">
+        <img id="camaro" src="assets/images/camaro.jpeg" alt="Chevrolet Camaro" class="hidden">
+        <img id="challenger" src="assets/images/challenger.jpg" alt="Dodge Challenger" class="hidden">
+        <img id="charger" src="assets/images/charger.jpg" alt="Dodge Charger" class="hidden">
+        <img id="corvette" src="assets/images/corvette.jpeg" alt="Chevrolet Corvette" class="hidden">
+        <img id="mustang" src="assets/images/mustang.jpeg" alt="Ford Mustang" class="hidden">
+        <img id="gameover" src="assets/images/gameover.jpeg" alt="Game Over" class="hidden">
+    </div>
+    <p id="hint-text"></p>
+    <button id="hint-button" class="hidden">Do you need a hint?</button>
     <p>You have <span id="lives"></span> lives remaining!</p>
     <p>Letters Guessed: <span id="guessed"></span></p>
 

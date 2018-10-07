@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=McLaren|Patrick+Hand+SC');
+
+body {
+    margin:0 auto;
+    background: #222;
+    color: #aaa;
+    text-align: center;
+    font-family: 'McLaren', cursive;
+    font-size: 1.5rem;
+}
+
+.header {
+    background: #444;
+    max-width: 100%;
+    border-bottom: rgb(156, 0, 0) 5px solid;
+    padding-bottom: 0;
+}
+
+.title {
+    font-size: 50px;
+    margin-bottom: 0;
+    margin-top: 0;
+    /* CREATE TEXT COLOR GRADIENT */
+    background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(231, 175, 175), rgb(245, 50, 50), rgb(156, 0, 0));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.sub-header {
+   margin: 10px 0; 
+}
+
+
+/* HIDDEN CLASS FOR GAME.JS TO SHOW OR HIDE ITEMS */
+.hidden {
+    display: none;
+}
+
+#word {
+    font-size: 2rem;
+}
+
+/* MANAGE IMAGE DIV TO KEEP MINIMIZE SCROLLING */
+.image-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+#hint-button {
+    background-color: yellow;
+    border-radius: 10px;
+    color: #222;
+    padding: 10px 25px;
+    font-size: 20px;
+}
+
+#lives {
+    font-size: 2rem;
+    color: green;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 5px;
+}

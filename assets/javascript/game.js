@@ -2,6 +2,8 @@
 var word = document.getElementById("word");
 var lives = document.getElementById("lives");
 var guessed = document.getElementById("guessed");
+var win = document.getElementById("win-text");
+var lose = document.getElementById("lose-text");
 var life = 15;
 var guesses = [];
 var blankAnswer = [];
@@ -15,7 +17,7 @@ var computerChoice = answers[Math.floor(Math.random() * answers.length)];
 
 // FOR LOOP TO TAKE ARRAY OF LETTERS AND CONVERT THEM TO ARRAY OF DASHES IN PLACE OF EACH LETTER.
 for ( let i = 0; i < computerChoice.length; i++) {
-    blankAnswer.push("-");
+    blankAnswer.push("_ ");
 }
 
 // FUNCTION TO REMOVE COMMAS FROM THE ARRAY WHEN PRINTING TO SCREEN
@@ -41,7 +43,7 @@ function check(userGuess) {
     for(var i = 0; i < computerChoice.length; i++) {
         if (userGuess === computerChoice[i]) {
             // display letter on blankAnswer
-            blankAnswer[i] = userGuess;
+            blankAnswer[i] = userGuess.toUpperCase();
         } 
     }
     if (!computerChoice.includes(userGuess) && alphabet.includes(userGuess)) {
@@ -53,7 +55,7 @@ function check(userGuess) {
 function validKey(userGuess) {
     if (alphabet.includes(userGuess)) {
         if (!guesses.includes(userGuess)) {
-            guesses.push(userGuess);
+            guesses.push(userGuess.toUpperCase());
             guessesString();
         } else {
             alert(userGuess + " has already been guessed");
@@ -66,11 +68,25 @@ function validKey(userGuess) {
 // CHECK SCORE FOR WIN AND LOSS
 function checkScore() {
     if (!blankAnswer.includes("-")) {
-        document.write("YOU WIN WIN WIN!!!");
+        // SHOW WIN TEXT
+        win.innerText = "YOU WIN!!!";
+        // REMOVE LINEUP PICTURE
+        var element1 = document.getElementById("lineup");
+        element1.classList.add("hidden");
+        // SHOW PICTURE OF COMPUTERCHOICE
+        var element2 = document.getElementById(computerChoice);
+        element2.classList.remove("hidden");
     }
     if (life === 0) {
-        // GAME OVER
-        document.write("GAME OVER");
+        // GAME OVER YOU LOSE TEXT
+        lose.innerText = "YOU LOSE";
+        // REMOVE LINEUP PICTURE
+        var element1 = document.getElementById("lineup");
+        element1.classList.add("hidden");
+        // SHOW GAME OVER PICTURE
+        var element2 = document.getElementById("gameover");
+        element2.classList.remove("hidden");
+        
     }
 }
 
